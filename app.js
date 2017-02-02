@@ -7,12 +7,31 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var handlebars = require('express-handlebars');
+
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// setup handlebars view engine
+app.engine('handlebars',
+    handlebars({defaultLayout: 'main',
+      helpers: { //this will help when displaying results in a table: records can start at index 1 instead of 0
+        if_equals: function (a, b, opts) {
+          if(a == b)
+            return opts.fn(this);
+          else
+            return opts.inverse(this);
+        },
+      }
+    }));
+
+
+app.set('view engine', 'handlebars');
+
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -54,6 +73,10 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+app.listen(3000, function(){
+  console.log('http://localhost:3000');
 });
 
 
