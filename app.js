@@ -9,7 +9,7 @@ var pg = require('pg');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var handlebars = require('express-handlebars');
-var db = require('./db')
+var db = require('./db');
 
 var app = express();
 
