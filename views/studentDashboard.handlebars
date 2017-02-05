@@ -1,0 +1,92 @@
+<section>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+
+            {{#each courses}}
+                <div class="panel-collapse collapse in">
+
+                    <div class="panel-body"><h3 style="color: #eb3812">{{this.course_code}} - {{this.course_name}}</h3></div>
+                    <table class="table table-condensed">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>Assignment Description</th>
+                            <th>Assignment Due Date</th>
+                            <th>Completed?</th>
+                            <th>Notes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each this.assignments}}
+                            <tr>
+
+                                <td><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{this.assignment_id}}">
+                                    {{this.assignment_description}}
+                                </button></td>
+                                <td>{{this.assignment_due_date}}</td>
+                                <td>{{this.assignment_is_completed_yes_no}}</td>
+                                <td>{{this.assignment_comments}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+{{#each courses}}
+
+    {{#each this.assignments}}
+
+        <div class="modal fade" id={{this.assignment_id}} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{this.assignment_description}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="storyForm" name="assignment" method="post" action="/saveAssignment/{{this.assignment_id}}/{{this.student_id}}">
+                            <h4>Notes</h4>
+                            <textarea class="form-control" name="comments" placeholder="Notes" autofocus>{{this.assignment_comments}} </textarea>
+                            <h4>Have you completed the assignment?</h4>
+                            {{#if this.assignment_is_completed}}
+                                <input type="checkbox" name="completed" value="true" checked/>
+                            {{else}}
+                                <input type="checkbox" name="completed" value="false" />
+                            {{/if}}
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {{/each}}
+{{/each}}
+
+
+
+
+
+<!--
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" id="imagepreview">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->

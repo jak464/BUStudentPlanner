@@ -7,15 +7,14 @@
                         <div class="col-md-2 col-md-offset-5">
                             <p>{{title}}</p>
 
-                            <form method="post" action="/selectUserView">
+                            <form method="post" action="/routeUser">
 
-                                <select id="leagueRulesSelect" class="form-control">
+                                <select id="roleSelect" name="role" class="form-control">
                                     <option value="student"> Student</option>
-                                    <option value="Professor"> Professor</option>
+                                    <option value="professor"> Professor</option>
                                 </select>
                                 <br/>
-                                <input type="submit" id="save" class="btn btn-primary pull-left"
-                                       value="Enter"/>
+                                <input type="submit" id="save" class="btn btn-primary pull-left" value="Enter"/>
                             </form>
                         </div>
                     </div>

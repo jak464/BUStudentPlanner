@@ -23,6 +23,18 @@ body {
 . center-block();
 }
 
+.checkbox {
+    width: 80px;
+    height: 26px;
+    margin: auto;
+    position: relative;
+    background: #fff;
+    border: 1px solid #2e2e2e;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
 hr {
     border-color: #F05F40;
     border-width: 3px;
