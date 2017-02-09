@@ -1,11 +1,12 @@
 <section>
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
+        <h3 style="color: #2e6da4; font-weight: bold; margin-bottom: 25px;">&nbsp; &nbsp; Welcome {{student_name}} !</h3>
+        <div class="panel panel-default panel-style">
 
             {{#each courses}}
                 <div class="panel-collapse collapse in">
 
-                    <div class="panel-body"><h3 style="color: #eb3812">{{this.course_code}} - {{this.course_name}}</h3></div>
+                    <div class="panel-body"><h3 style="color: #eb3812; font-weight: bold;">{{this.course_code}} - {{this.course_name}}</h3></div>
                     <table class="table table-condensed">
                         <thead class="thead-inverse">
                         <tr>
@@ -70,23 +71,3 @@
         </div>
     {{/each}}
 {{/each}}
-
-
-
-
-
-<!--
-<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <img src="" id="imagepreview">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
--->

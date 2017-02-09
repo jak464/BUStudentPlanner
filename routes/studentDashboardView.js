@@ -17,7 +17,8 @@ studentDashboard.render = function(req, res) {
         '   case when ast.is_completed = true then \'Yes\' else \'No\' end as assignment_is_completed_yes_no,' +
         '  ast.is_completed as assignment_is_completed, ' +
         '  ast.comments, ' +
-        '  s.id as student_id ' +
+        '  s.id as student_id, ' +
+        '  s.student_name ' +
         ' from student s' +
         ' join course_student cs on s.id = cs.student_id' +
         ' join course c on c.id = cs.course_id' +
@@ -29,6 +30,7 @@ studentDashboard.render = function(req, res) {
             console.log(result);
 
             var courses = [];
+            var student_name = result.rows[0].student_name;
 
             for(var i = 0; i < result.rows.length; i++) {
                courses[result.rows[i].course_id] = {
@@ -47,12 +49,14 @@ studentDashboard.render = function(req, res) {
                     assignment_is_completed: result.rows[i].assignment_is_completed,
                     assignment_is_completed_yes_no: result.rows[i].assignment_is_completed_yes_no,
                     assignment_comments: result.rows[i].comments,
-                    student_id: result.rows[i].student_id}
+                    student_id: result.rows[i].student_id,
+                    student_name: result.rows[i].student_name}
                 );
             }
 
             res.render('studentDashboard', {
-                courses: courses
+                courses: courses,
+                student_name: student_name
             });
     });
 };

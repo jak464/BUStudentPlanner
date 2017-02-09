@@ -13,6 +13,11 @@ body {
     font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
+.panel-style {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
 .center-block {
     display: block;
     margin-left: auto;
@@ -161,7 +166,7 @@ aside {
 
     .navbar-default .navbar-header .navbar-brand:hover,
     .navbar-default .navbar-header .navbar-brand:focus {
-        color: white;
+        color: #eb3812;
     }
 
     .navbar-default .nav > li > a,
@@ -493,7 +498,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 ::selection {
-    color: white;
+    color: #eb3812;
     text-shadow: none;
     background: #222222;
 }
