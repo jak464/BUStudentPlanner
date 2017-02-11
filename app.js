@@ -80,7 +80,6 @@ app.listen(3000, function () {
 });
 
 db.query('select 1 as one', function(err, res) {
-    console.log(res.rows[0].one);
 });
 
 

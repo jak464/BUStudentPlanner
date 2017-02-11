@@ -20,10 +20,11 @@ studentDashboard.render = function(req, res) {
         '  s.id as student_id, ' +
         '  s.student_name ' +
         ' from student s' +
-        ' join course_student cs on s.id = cs.student_id' +
-        ' join course c on c.id = cs.course_id' +
-        ' join "assignment" asg on asg.course_id = cs.course_id' +
-        ' join assignment_student ast on ast.assignment_id = asg.id and ast.student_id = s.id ' +
+        ' left join course_student cs on s.id = cs.student_id' +
+        ' left join course c on c.id = cs.course_id' +
+        ' left join "assignment" asg on asg.course_id = cs.course_id' +
+        ' left join assignment_student ast on ast.assignment_id = asg.id and ast.student_id = s.id ' +
+        ' where ast.can_view = true ' +
         ' order by asg.due_date',
         function(err, result) {
             console.log(err);

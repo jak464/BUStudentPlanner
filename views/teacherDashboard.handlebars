@@ -1,34 +1,58 @@
 <section>
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
+        <h1 style="color: #2e6da4; font-weight: bold; margin-bottom: 25px; font-family: 'Caveat Brush', cursive;">&nbsp;
+            &nbsp; Welcome Professor: {{teacher_name}} !</h1>
+
+        <div class="panel panel-default panel-style">
 
             {{#each courses}}
-                <div class="panel-collapse collapse in">
+                <div class="panel panel-collapse collapse in" style="padding-bottom: 20px">
 
-                    <div class="panel-body"><h3 style="color: #eb3812">{{this.course_code}} - {{this.course_name}}</h3></div>
+                    <div class="panel-body"><h3
+                            style="color: #eb3812; font-weight: bold; margin-bottom: 0px; padding-bottom: 0px; display:inline">{{this.course_code}}
+                        - {{this.course_name}}</h3></div>
+
+                    <a href="#course{{this.course_id}}" data-toggle="modal">
+                    <h3 style="display: inline; margin-left: 18px; color: #2e6da4; font-family: 'Caveat Brush', cursive; text-decoration: underline; padding-bottom:20px;">
+                        Course Announcements: </h3></a>
+                    {{this.course_announcements}}
+                    <br/>
+                    <br/>
+                    <div style="padding-left: 20px">
                     <table class="table table-condensed">
                         <thead class="thead-inverse">
                         <tr>
                             <th>Assignment Description</th>
                             <th>Assignment Due Date</th>
-                            <th>Completed?</th>
-                            <th>Notes</th>
+                            <th>Published?</th>
                         </tr>
                         </thead>
                         <tbody>
                         {{#each this.assignments}}
                             <tr>
 
-                                <td><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{this.assignment_id}}">
-                                    {{this.assignment_description}}
-                                </button></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                                            data-target="#assignment{{this.assignment_id}}">
+                                        {{this.assignment_description}}
+                                    </button>
+                                </td>
                                 <td>{{this.assignment_due_date}}</td>
-                                <td>{{this.assignment_is_completed_yes_no}}</td>
-                                <td>{{this.assignment_comments}}</td>
+                                <td>{{this.assignment_published_yes_no}}</td>
                             </tr>
                         {{/each}}
+
                         </tbody>
                     </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1 col-md-offset-11">
+                            <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal"
+                                    data-target="#newAssignment{{this.course_id}}" style="margin-right: 20px">
+                                ADD NEW ASSIGNMENT
+                            </button>
+                        </div>
+                    </div>
 
                 </div>
             {{/each}}
@@ -38,24 +62,91 @@
 
 {{#each courses}}
 
+    <!-- ADD NEW ASSIGNMENT -->
+    <div class="modal fade" id=newAssignment{{this.course_id}} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Assignment</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="storyForm" name="assignment" method="post"
+                          action="/createNewAssignment/{{this.course_id}}">
+                        <h4>Assignment Description </h4>
+                        <textarea name="description" cols="40" rows="3"></textarea>
+                        <h4>Assignment Due Date </h4>
+                        <input type="date" name="dueDate">
+                        <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
+                        Selecting yes will propagate this assignment to your students. <br/>
+                        <input type="checkbox" name="published" value="true" checked/>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create Assignment</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- UPDATE COURSE ANNOUNCEMENTS -->
+    <div class="modal fade" id="course{{this.course_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Course Announcements</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="storyForm" name="assignment" method="post"
+                          action="/updateCourseAnnouncements/{{this.course_id}}">
+                        <textarea class="form-control" name="announcements" placeholder="announcements"
+                                  autofocus>{{this.course_announcements}} </textarea>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     {{#each this.assignments}}
 
-        <div class="modal fade" id={{this.assignment_id}} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- UPDATE EXISTING ASSIGNMENT -->
+        <div class="modal fade" id="assignment{{this.assignment_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">{{this.assignment_description}}</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="storyForm" name="assignment" method="post" action="/saveAssignment/{{this.assignment_id}}/{{this.student_id}}">
-                            <h4>Notes</h4>
-                            <textarea class="form-control" name="comments" placeholder="Notes" autofocus>{{this.assignment_comments}} </textarea>
-                            <h4>Have you completed the assignment?</h4>
-                            {{#if this.assignment_is_completed}}
-                                <input type="checkbox" name="completed" value="true" checked/>
+                        <form id="storyForm" name="assignment" method="post"
+                              action="/updateAssignment/{{this.assignment_id}}">
+                            <h4>Assignment Description</h4>
+                            <textarea class="form-control" name="description" placeholder="description"
+                                      autofocus>{{this.assignment_description}} </textarea>
+
+                            <h4>Assignment Due Date </h4>
+                            <input type="date" name="dueDate"  value="{{this.assignment_due_date_picker}}">
+
+                            <h4 style="margin-bottom: 0px">Have you published the assignment?</h4>
+                            Selecting yes will propagate this assignment to your students. <br/>
+                            {{#if this.assignment_published}}
+                                <input type="checkbox" name="published" value="true" checked disabled/>
                             {{else}}
-                                <input type="checkbox" name="completed" value="false" />
+                                <input type="checkbox" name="published" value="false"/>
                             {{/if}}
 
                             <div class="modal-footer">

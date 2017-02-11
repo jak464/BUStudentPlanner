@@ -6,12 +6,18 @@ var studentDashboardView = require("./studentDashboardView");
 var teacherDashboardView = require("./teacherDashboardView");
 var routeUser = require("./routeUser");
 var saveAssignment = require("./saveAssignment");
+var createNewAssignment = require("./createNewAssignment");
+var updateAssignment = require("./updateAssignment");
+var updateCourseAnnouncements = require("./updateCourseAnnouncements");
+
 
 router.get('/studentDashboardView', studentDashboardView.render);
 router.get('/teacherDashboardView', teacherDashboardView.render);
 router.post('/routeUser', routeUser);
 router.post('/saveAssignment/:assignmentId/:studentId', saveAssignment);
-
+router.post('/updateCourseAnnouncements/:courseId/', updateCourseAnnouncements);
+router.post('/updateAssignment/:assignmentId', updateAssignment);
+router.post('/createNewAssignment/:courseId/', createNewAssignment);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
