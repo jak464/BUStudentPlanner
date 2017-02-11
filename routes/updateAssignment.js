@@ -15,25 +15,23 @@ module.exports =
         var canView;
         var studentId = 1;
 
+        // if undefined - already true. dont need to do anything. should not set anything to false.
+        // should go from false --> true
+        // but not true --> false
         if (typeof published != 'undefined'){
-
             if(published) {
                 published = true;
                 canView = true;
             }
-            else {
-                published = false;
-                canView = false;
-            }
         }
-
+        
         db.query('UPDATE assignment set assignment_description = $1, due_date = $2, is_published = $4 WHERE id = $3',
             [description, dueDate, assignmentId, published],
             function(err, results) {
                 if (err)
                     console.log("Error inserting : %s ",err );
-                db.query('UPDATE assignment_student set can_view = $1 WHERE student_id = $2',
-                    [canView, studentId],
+                db.query('UPDATE assignment_student set can_view = $1 WHERE student_id = $2 and assignment_id = $3',
+                    [canView, studentId, assignmentId],
                     function(err) {
                         if (err)
                             console.log("Error inserting : %s ",err );

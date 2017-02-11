@@ -19,10 +19,10 @@ module.exports =
                 published = true;
                 canView = true;
             }
-            else {
-                published = false;
-                canView = false;
-            }
+        }
+        else {
+            published = false;
+            canView = false;
         }
 
 
