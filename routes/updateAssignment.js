@@ -15,16 +15,11 @@ module.exports =
         var canView;
         var studentId = 1;
 
-        // if undefined - already true. dont need to do anything. should not set anything to false.
-        // should go from false --> true
-        // but not true --> false
-        if (typeof published != 'undefined'){
-            if(published) {
-                published = true;
-                canView = true;
-            }
+        if (typeof published == 'undefined') {
+            published = true;
         }
-        
+        canView = published;
+
         db.query('UPDATE assignment set assignment_description = $1, due_date = $2, is_published = $4 WHERE id = $3',
             [description, dueDate, assignmentId, published],
             function(err, results) {

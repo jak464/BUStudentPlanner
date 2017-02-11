@@ -11,19 +11,8 @@ module.exports =
         var description = req.body.description;
         var dueDate = req.body.dueDate;
         var published = req.body.published;
-        var canView;
         var studentId = 1;
-        
-        if (typeof published != 'undefined'){
-            if(published) {
-                published = true;
-                canView = true;
-            }
-        }
-        else {
-            published = false;
-            canView = false;
-        }
+        var canView = published;
 
 
         db.connect().then(function(client) {
