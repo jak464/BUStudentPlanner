@@ -7,7 +7,7 @@ var teacherDashboard = require('./teacherDashboardView');
 
 
 module.exports =
-    function updateCourse(req , res){
+    function updateCourseAssignment(req , res){
         var assignmentId = req.params.assignmentId;
         var dueDate = req.body.dueDate;
         var description = req.body.description;
@@ -16,16 +16,19 @@ module.exports =
         var studentId = 1;
 
         if (typeof published != 'undefined'){
-            published = true;
-            canView = true;
-        }
-        else {
-            published = false;
-            canView = false;
+
+            if(published) {
+                published = true;
+                canView = true;
+            }
+            else {
+                published = false;
+                canView = false;
+            }
         }
 
-        db.query('UPDATE assignment set assignment_description = $1, due_date = $2 WHERE id = $3',
-            [description, dueDate, assignmentId],
+        db.query('UPDATE assignment set assignment_description = $1, due_date = $2, is_published = $4 WHERE id = $3',
+            [description, dueDate, assignmentId, published],
             function(err, results) {
                 if (err)
                     console.log("Error inserting : %s ",err );

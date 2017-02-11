@@ -53,9 +53,7 @@ teacherDashboard.render = function(req, res) {
                     assignment_published: result.rows[i].is_published}
                 );
             }
-
-            console.log('ATTENTION!!!! ' + assignment_due_date_picker);
-
+            
             res.render('teacherDashboard', {
                 courses: courses,
                 teacher_name : teacher_name

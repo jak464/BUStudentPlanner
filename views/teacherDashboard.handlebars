@@ -69,7 +69,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">New Assignment</h4>
+                    <h4 class="modal-title" id="myModalLabel"  style="color: #2e6da4;; font-size: 30px; font-weight: bold; font-family: 'Caveat Brush', cursive;">New Assignment</h4>
                 </div>
                 <div class="modal-body">
                     <form id="storyForm" name="assignment" method="post"
@@ -77,7 +77,7 @@
                         <h4>Assignment Description </h4>
                         <textarea name="description" cols="40" rows="3"></textarea>
                         <h4>Assignment Due Date </h4>
-                        <input type="date" name="dueDate">
+                        <input type="date" id="datePicker" name="dueDate">
                         <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
                         Selecting yes will propagate this assignment to your students. <br/>
                         <input type="checkbox" name="published" value="true" checked/>
@@ -101,7 +101,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Course Announcements</h4>
+                    <h4 class="modal-title" id="myModalLabel"  style="color: #2e6da4;; font-size: 30px; font-weight: bold; font-family: 'Caveat Brush', cursive;">Course Announcements</h4>
                 </div>
                 <div class="modal-body">
                     <form id="storyForm" name="assignment" method="post"
@@ -111,7 +111,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Update Announcements</button>
                         </div>
                     </form>
                 </div>
@@ -129,11 +129,11 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{this.assignment_description}}</h4>
+                        <h4 class="modal-title" id="myModalLabel"  style="color: #2e6da4;; font-size: 30px; font-weight: bold; font-family: 'Caveat Brush', cursive;">{{this.assignment_description}}</h4>
                     </div>
                     <div class="modal-body">
                         <form id="storyForm" name="assignment" method="post"
-                              action="/updateAssignment/{{this.assignment_id}}">
+                              action="/updateOrDeleteRouter/{{this.assignment_id}}">
                             <h4>Assignment Description</h4>
                             <textarea class="form-control" name="description" placeholder="description"
                                       autofocus>{{this.assignment_description}} </textarea>
@@ -141,18 +141,21 @@
                             <h4>Assignment Due Date </h4>
                             <input type="date" name="dueDate"  value="{{this.assignment_due_date_picker}}">
 
-                            <h4 style="margin-bottom: 0px">Have you published the assignment?</h4>
-                            Selecting yes will propagate this assignment to your students. <br/>
                             {{#if this.assignment_published}}
+                                <h4 style="margin-bottom: 0px">You have already published this assignment</h4>
                                 <input type="checkbox" name="published" value="true" checked disabled/>
                             {{else}}
+                                <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
+                                Selecting yes will propagate this assignment to your students. <br/>
                                 <input type="checkbox" name="published" value="false"/>
                             {{/if}}
 
                             <div class="modal-footer">
+                                <button type="submit" value="delete" name="updateDelete" class="btn btn-danger pull-left" style="margin-left: 0px">Delete</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" value="update" name="updateDelete" class="btn btn-primary">Update Assignment</button>
                             </div>
+                            <p style="font-size: 8px;">*Note: Deleting this assignment will propagate to your students planners</p>
                         </form>
                     </div>
 
