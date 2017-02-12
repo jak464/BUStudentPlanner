@@ -10,10 +10,9 @@ module.exports =
         var courseId = req.params.courseId;
         var description = req.body.description;
         var dueDate = req.body.dueDate;
-        var published = req.body.published;
+        var published = req.body.published == 'true';
         var studentId = 1;
         var canView = published;
-
 
         db.connect().then(function(client) {
             client.query('INSERT into assignment(assignment_description, due_date, is_published, course_id) VALUES($1, $2, $3, $4) returning id',

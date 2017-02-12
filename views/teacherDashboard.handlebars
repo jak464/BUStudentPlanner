@@ -80,7 +80,10 @@
                         <input type="date" id="datePicker" name="dueDate">
                         <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
                         Selecting yes will propagate this assignment to your students. <br/>
-                        <input type="checkbox" name="published" value="true" checked/>
+                        <select name="published">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -143,11 +146,17 @@
 
                             {{#if this.assignment_published}}
                                 <h4 style="margin-bottom: 0px">You have already published this assignment</h4>
-                                <input type="checkbox" name="published" value="true" checked disabled/>
+                                <select name="published" disabled style="color: graytext">
+                                    <option value="true" selected>Yes</option>
+                                    <option value="false">No</option>
+                                </select>
                             {{else}}
                                 <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
                                 Selecting yes will propagate this assignment to your students. <br/>
-                                <input type="checkbox" name="published" value="false"/>
+                                <select name="published">
+                                    <option value="true">Yes</option>
+                                    <option value="false" selected>No</option>
+                                </select>
                             {{/if}}
 
                             <div class="modal-footer">

@@ -17,7 +17,10 @@ module.exports =
 
         if (typeof published == 'undefined') {
             published = true;
+        } else  {
+            published = req.body.published == 'true';
         }
+
         canView = published;
 
         db.query('UPDATE assignment set assignment_description = $1, due_date = $2, is_published = $4 WHERE id = $3',
