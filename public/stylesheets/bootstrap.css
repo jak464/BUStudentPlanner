@@ -1122,6 +1122,8 @@ a:hover,
 a:focus {
   color: #23527c;
   text-decoration: underline;
+  color: hotpink;
+
 }
 a:focus {
   outline: thin dotted;

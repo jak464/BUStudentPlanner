@@ -9,7 +9,6 @@ module.exports =
     function displayView(req, res) {
 
         var user = req.body.role;
-        console.log('user ' + user);
 
         if (user === "professor") {
             teacherDashboard.render(req, res);

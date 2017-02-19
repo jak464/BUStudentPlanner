@@ -1,0 +1,65 @@
+<section>
+    <div style="margin-left: 60px">
+        <h3 style="display: inline;color: #2e6da4; font-size:24px; font-family: 'Caveat Brush', cursive; text-decoration: underline; padding-bottom:20px;">
+            Configure Courses</h3>
+        {{#if courses}}
+            <h4>Courses Available for Subscription</h4>
+            <div style="padding-left: 20px; padding-right: 20px">
+                <table class="table table-condensed"
+                       style="margin-left:20px; padding-left: 20px; padding-bottom: 20px; margin-bottom: 30px; padding-right: 20px">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Instructor</th>
+                        <th class="col col-sm-5"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each courses}}
+                        <tr>
+                            <td>{{this.course_name}}</td>
+                            <td>{{this.course_code}}</td>
+                            <td>{{this.instructor_name}}</td>
+                            <td>
+                                <form id="subscribeForm" name="subscribe" method="post"
+                                      action="/subscribeToCourse/{{this.course_id}}">
+                                    <button type="submit" class="btn btn-success btn-lg" style="margin-right: 20px">
+                                        SUBSCRIBE TO COURSE
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{else}}
+            <h4>Courses Available for Subscription</h4>
+
+        {{/if}}
+    </div>
+
+    <div style="margin-left: 60px">
+        <h3 style="display: inline;color: #2e6da4; font-size: 24px; font-family: 'Caveat Brush', cursive; text-decoration: underline; padding-bottom:20px;">
+            Set Personal Info</h3>
+        <form id="updateInfo" name="assignment" method="post"
+              action="/updatePersonalInfo">
+            <h4>Email Address</h4>
+            <input type="text" name="emailAddress" value="{{this.email_address}}">
+            <h4>Receive Daily Reminders of Upcoming Assignments</h4>
+
+            {{#if this.notifications}}
+                <input type="checkbox" name="notifications" value="true" checked/> <br/>
+            {{else}}
+                <input type="checkbox" name="notifications" value="false"/> <br/>
+            {{/if}}
+
+            <button type="submit" class="btn btn-success btn-lg" style="margin-right: 20px">
+                Update Settings
+            </button>
+        </form>
+
+    </div>
+
+</section>

@@ -12,13 +12,13 @@
                             style="color: #eb3812; font-weight: bold; margin-bottom: 0px; padding-bottom: 0px; display:inline">{{this.course_code}}
                         - {{this.course_name}}</h3></div>
 
-                    <a href="#course{{this.course_id}}" data-toggle="modal">
-                    <h3 style="display: inline; margin-left: 18px; color: #2e6da4; font-family: 'Caveat Brush', cursive; text-decoration: underline; padding-bottom:20px;">
-                        Course Announcements: </h3></a>
+                    <h3 style="display: inline; margin-left: 18px; color: #2e6da4; font-family: 'Caveat Brush', cursive; padding-bottom:20px;">
+                        Course Announcements: </h3>
                     {{this.course_announcements}}
+                    <a href="#course{{this.course_id}}" data-toggle="modal" class="courseAnnouncementsHover fa fa-pencil" ></a>
                     <br/>
                     <br/>
-                    <div style="padding-left: 20px">
+                    <div style="padding-left: 45px">
                     <table class="table table-condensed">
                         <thead class="thead-inverse">
                         <tr>
@@ -34,7 +34,7 @@
                                 <td>
                                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
                                             data-target="#assignment{{this.assignment_id}}">
-                                        {{this.assignment_description}}
+                                         {{this.assignment_description}}<span class="fa fa-pencil"></span>
                                     </button>
                                 </td>
                                 <td>{{this.assignment_due_date}}</td>
@@ -49,7 +49,7 @@
                         <div class="col-md-1 col-md-offset-11">
                             <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal"
                                     data-target="#newAssignment{{this.course_id}}" style="margin-right: 20px">
-                                ADD NEW ASSIGNMENT
+                                <span class="fa fa-plus"></span> ADD NEW ASSIGNMENT
                             </button>
                         </div>
                     </div>
@@ -107,9 +107,9 @@
                     <h4 class="modal-title" id="myModalLabel"  style="color: #2e6da4;; font-size: 30px; font-weight: bold; font-family: 'Caveat Brush', cursive;">Course Announcements</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="storyForm" name="assignment" method="post"
+                    <form id="announcementsForm" name="announcements" method="post"
                           action="/updateCourseAnnouncements/{{this.course_id}}">
-                        <textarea class="form-control" name="announcements" placeholder="announcements"
+                        <textarea class="form-control" name="announcements" placeholder="Announcements"
                                   autofocus>{{this.course_announcements}} </textarea>
 
                         <div class="modal-footer">
@@ -135,10 +135,10 @@
                         <h4 class="modal-title" id="myModalLabel"  style="color: #2e6da4;; font-size: 30px; font-weight: bold; font-family: 'Caveat Brush', cursive;">{{this.assignment_description}}</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="storyForm" name="assignment" method="post"
+                        <form id="updateDeleteForm" name="assignment" method="post"
                               action="/updateOrDeleteRouter/{{this.assignment_id}}">
                             <h4>Assignment Description</h4>
-                            <textarea class="form-control" name="description" placeholder="description"
+                            <textarea class="form-control" name="description" placeholder="Description"
                                       autofocus>{{this.assignment_description}} </textarea>
 
                             <h4>Assignment Due Date </h4>

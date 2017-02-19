@@ -1,9 +1,6 @@
 /**
  * Created by n0216698 on 2/9/2017.
  */
-/**
- * Created by n0216698 on 2/4/2017.
- */
 var db = require('../db');
 var teacherDashboard = require('./teacherDashboardView');
 

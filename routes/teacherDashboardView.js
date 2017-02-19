@@ -22,12 +22,13 @@ teacherDashboard.render = function(req, res) {
         ' ast.is_published as is_published, ' +
         '  i.instructor_name ' +
         ' from course c ' +
-        ' join assignment ast on c.id = ast.course_id ' +
-        ' join instructor i on c.instructor_id = i.id ' +
+        ' left join assignment ast on c.id = ast.course_id ' +
+        ' left join instructor i on c.instructor_id = i.id ' +
         ' order by ast.due_date ',
         function(err, result) {
-            console.log(err);
-            console.log(result);
+            if (err) {
+                console.log(err);
+            }
 
             var courses = [];
             var teacher_name = result.rows[0].instructor_name;
@@ -44,15 +45,20 @@ teacherDashboard.render = function(req, res) {
             }
 
             for(var i = 0; i < result.rows.length; i++) {
-                courses[result.rows[i].course_id].assignments.push({
-                    assignment_id: result.rows[i].assignment_id,
-                    assignment_description: result.rows[i].assignment_description,
-                    assignment_due_date: result.rows[i].assignment_due_date,
-                    assignment_due_date_picker: result.rows[i].date_picker_due_date,
-                    assignment_published_yes_no: result.rows[i].is_published_yes_no,
-                    assignment_published: result.rows[i].is_published}
-                );
+                if(result.rows[i].assignment_id) {
+                    courses[result.rows[i].course_id].assignments.push({
+                        assignment_id: result.rows[i].assignment_id,
+                        assignment_description: result.rows[i].assignment_description,
+                        assignment_due_date: result.rows[i].assignment_due_date,
+                        assignment_due_date_picker: result.rows[i].date_picker_due_date,
+                        assignment_published_yes_no: result.rows[i].is_published_yes_no,
+                        assignment_published: result.rows[i].is_published}
+                    );
+                }
+
             }
+
+            console.log('results ' + result);
             
             res.render('teacherDashboard', {
                 courses: courses,

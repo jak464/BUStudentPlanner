@@ -4,7 +4,6 @@
 var db = require('../db');
 var studentDashboard = require('./studentDashboardView');
 
-
 module.exports =
     function saveAssignment(req , res){
         var assignmentId = req.params.assignmentId;
@@ -12,16 +11,12 @@ module.exports =
         var comments = req.body.comments;
         var completed = req.body.completed;
 
-
         if (typeof completed != 'undefined'){
             completed = true;
-        }
-        else {
+        } else {
             completed = false;
         }
-
-        console.log('attention jack farm ')
-        console.log(completed);
+        
 
         db.query('UPDATE assignment_student set comments = $1, is_completed = $2 WHERE assignment_id = $3 AND student_id = $4',
             [comments, completed, assignmentId, studentId],

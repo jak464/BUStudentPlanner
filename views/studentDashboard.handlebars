@@ -1,7 +1,13 @@
 <section>
     <div class="panel-group" id="accordion">
+        <div class="pull-right">
+            <h3 style="display: inline; margin-left: 18px; color: #2e6da4; font-family: 'Caveat Brush', cursive; padding-bottom:20px; margin-right:48px;">
+                <a href="/studentSettingsView">Configure Settings <i class="fa fa-cog" aria-hidden="true"></i></a></h3>
+        </div>
+
         <h1 style="color: #2e6da4; font-weight: bold; margin-bottom: 25px; font-family: 'Caveat Brush', cursive;">&nbsp;
             &nbsp; Welcome Student:  {{student_name}} !</h1>
+
         <div class="panel panel-default panel-style">
 
             {{#each courses}}
@@ -10,10 +16,13 @@
                     <div class="panel-body"><h3
                             style="color: #eb3812; font-weight: bold; margin-bottom: 0px; padding-bottom: 0px; display:inline">{{this.course_code}}
                         - {{this.course_name}}</h3></div>
-
-                    <div style="padding-left: 20px">
-                        <table class="table table-condensed"
-                               style="margin-left:20px; padding-left: 20px; padding-bottom: 20px; margin-bottom: 30px; padding-right: 20px">
+                    <h3 style="display: inline; margin-left: 18px; color: #2e6da4; font-family: 'Caveat Brush', cursive; padding-bottom:20px;">
+                        Course Announcements: </h3>
+                    {{this.course_announcements}}
+                    <br/>
+                    <br/>
+                    <div style="padding-left: 45px">
+                        <table class="table table-condensed">
                             <thead class="thead-inverse">
                             <tr>
                                 <th>Assignment Description</th>
@@ -29,7 +38,7 @@
                                     <td>
                                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
                                                 data-target="#{{this.assignment_id}}">
-                                            {{this.assignment_description}}
+                                            {{this.assignment_description}} <span class="fa fa-pencil"></span>
                                         </button>
                                     </td>
                                     <td>{{this.assignment_due_date}}</td>
