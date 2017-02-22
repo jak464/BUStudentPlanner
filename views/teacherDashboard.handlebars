@@ -77,7 +77,7 @@
                         <h4>Assignment Description </h4>
                         <textarea name="description" cols="40" rows="3"></textarea>
                         <h4>Assignment Due Date </h4>
-                        <input type="date" id="datePicker" name="dueDate">
+                        <input type="date" id="datePicker" name="dueDate" required min="{{../current_date}}">
                         <h4 style="margin-bottom: 0px">Do you wish to publish this assignment?</h4>
                         Selecting yes will propagate this assignment to your students. <br/>
                         <select name="published">

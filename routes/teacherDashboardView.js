@@ -62,7 +62,8 @@ teacherDashboard.render = function(req, res) {
             
             res.render('teacherDashboard', {
                 courses: courses,
-                teacher_name : teacher_name
+                teacher_name: teacher_name,
+                current_date: new Date().toISOString().slice(0,10)
             });
         });
 };
